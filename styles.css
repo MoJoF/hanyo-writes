@@ -28,8 +28,17 @@ header,
 footer {
   display: flex;
   justify-content: space-between;
-  margin: 5vh 0;
   align-items: center;
+}
+
+header,
+footer,
+section {
+  margin: 10vh 0;
+}
+
+header {
+  margin: 5vh 0;
 }
 
 nav {
@@ -41,6 +50,40 @@ nav {
   display: flex;
   justify-content: space-between;
 }
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.post {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.post__header {
+  font-size: 32px;
+  font-weight: bold;
+  width: fit-content;
+}
+
+.post__category {
+  font-style: italic;
+  width: fit-content;
+}
+
+.post__link {
+  color: rgb(65, 65, 217);
+  background: rgba(114, 114, 181, 0.25);  
+}
+
+.post__text {
+  font-size: 20px;
+  line-height: 160%;
+}
+
 
 #editor {
   width: 500px;
