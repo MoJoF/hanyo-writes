@@ -25,6 +25,11 @@ footer {
   margin: 5vh 0;
 }
 
+nav {
+  display: flex;
+  gap: 20px;
+}
+
 #editor {
   width: 500px;
   min-height: 200px;
