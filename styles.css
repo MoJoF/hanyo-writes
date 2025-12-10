@@ -15,8 +15,8 @@ a {
 }
 
 a:hover {
-  color: rgb(38, 38, 138);
-  background: rgba(70, 70, 158, 0.25);
+  color: rgb(65, 65, 217);
+  background: rgba(114, 114, 181, 0.25);
 }
 
 body {
@@ -35,6 +35,11 @@ footer {
 nav {
   display: flex;
   gap: 20px;
+}
+
+.sections {
+  display: flex;
+  justify-content: space-between;
 }
 
 #editor {
