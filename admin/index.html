@@ -2,11 +2,9 @@
     <link rel="stylesheet" href="admin.css">
 </head>
 
-<!-- <input type="text" class="encryptForm" placeholder="Текст для шифровки">
-<button class="encrypt">Зашифровать</button> -->
 <div class="auth">
     <input type="text" placeholder="Логин" class="username-input">
-    <input type="text" placeholder="Пароль" class="password-input">
+    <input type="password" placeholder="Пароль" class="password-input">
     <button class="login">Войти</button>
 </div>
 
@@ -30,14 +28,6 @@
     }
 
     document.addEventListener('DOMContentLoaded', function () {
-        const encryptForm = document.querySelector('.encryptForm')
-        const encryptButton = document.querySelector("button.encrypt")
-
-        encryptButton.onclick = () => {
-            let text = encryptForm.value
-            encryptForm.value = btoa(text)
-        }
-
         // Если нет записи в localStorage, проверка пользователя 
         // по логину и паролю
         document.querySelector("button.login").onclick = () => {
@@ -45,6 +35,7 @@
             const password = document.querySelector(".password-input").value
 
             const auth = btoa(JSON.stringify({ username, password }))
+            console.log(auth)
 
             fetch(url, {
                 method: "POST",
