@@ -2,34 +2,23 @@
     <link rel="stylesheet" href="admin.css">
 </head>
 
-<input type="text" class="encryptForm" placeholder="Текст для шифровки">
-<button class="encrypt">Зашифровать</button>
+<!-- <input type="text" class="encryptForm" placeholder="Текст для шифровки">
+<button class="encrypt">Зашифровать</button> -->
 <div class="auth">
-    <input type="text" placeholder="Логин">
-    <input type="text" placeholder="Пароль">
-    <button>Войти</button>
+    <input type="text" placeholder="Логин" class="username-input">
+    <input type="text" placeholder="Пароль" class="password-input">
+    <button class="login">Войти</button>
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const encryptForm = document.querySelector('.encryptForm')
-        const encryptButton = document.querySelector("button.encrypt")
-        
-        encryptButton.onclick = () => {
-            let text = encryptForm.value
-            encryptForm.value = btoa(text)
-        }
-    })
-
     const authData = localStorage.getItem("auth")
+    const url = atob("aHR0cHM6Ly9oYW55by13cml0ZXMub215cmF1Y3kud29ya2Vycy5kZXYvYXV0aA==")
+    const headers = { "Content-Type": "application/json" }
     // Если сохранилась запись об авторизации
     if (authData) {
-        const url = atob("aHR0cHM6Ly9oYW55by13cml0ZXMub215cmF1Y3kud29ya2Vycy5kZXYvYXV0aA==")
         fetch(url, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers,
             body: JSON.stringify({ authData })
         })
             .then(resp => resp.json())
@@ -39,4 +28,38 @@
                 }
             })
     }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const encryptForm = document.querySelector('.encryptForm')
+        const encryptButton = document.querySelector("button.encrypt")
+
+        encryptButton.onclick = () => {
+            let text = encryptForm.value
+            encryptForm.value = btoa(text)
+        }
+
+        // Если нет записи в localStorage, проверка пользователя 
+        // по логину и паролю
+        document.querySelector("button.login").onclick = () => {
+            const username = document.querySelector(".username-input").value
+            const password = document.querySelector(".password-input").value
+
+            const auth = btoa(JSON.stringify({ username, password }))
+
+            fetch(url, {
+                method: "POST",
+                headers,
+                body: JSON.stringify({ authData: auth })
+            })
+                .then(resp => resp.json())
+                .then(data => {
+                    if (data.status === "OK") {
+                        localStorage.setItem("auth", auth)
+                        document.location.href = "dashboard.html"
+                    } else if (data.error) {
+                        alert(data.error)
+                    }
+                })
+        }
+    })
 </script>
