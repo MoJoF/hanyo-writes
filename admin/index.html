@@ -34,6 +34,17 @@
             const username = document.querySelector(".username-input").value
             const password = document.querySelector(".password-input").value
 
+            if (!username) {
+                alert("Введите логин")
+                document.querySelector(".username-input").focus()
+                return
+            }
+            if (!password) {
+                alert("Введите пароль")
+                document.querySelector(".password-input").focus()
+                return
+            }
+
             const auth = btoa(JSON.stringify({ username, password }))
             console.log(auth)
 
