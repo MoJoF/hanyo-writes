@@ -10,15 +10,29 @@
         .dashboard nav {
             display: flex;
             justify-content: space-between;
+            padding: 10px;
+        }
+
+        nav > a {
+            font-style: italic;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         aside {
+            padding: 10px;
+            background: #292929;
+            width: 250px;
+        }
 
+        main {
+            display: flex;
         }
 
         #editor {
-            width: 500px;
-            height: 650px;
+            width: 100%;
+            height: 675px;
             padding: 10px;
             border: 1px solid white;
             overflow-y: scroll;
@@ -41,19 +55,23 @@
 <div class="dashboard">
     <nav>
         <a href="/">
-            Перейти на сайт
+            <img src="/assets/images/home.png" alt=""><span>Перейти на сайт</span>
         </a>
         <span><i>&copy; hanyo</i></span>
     </nav>
 
     <main>
-        <div class="aside">
+        <aside>
+            <section>
+
+            </section>
             <a href="posts.html">Список постов</a>
             <a href="create_post.html">Создать пост</a>
-        </div>
-        <div id="editor" contenteditable="">
-
-        </div>
+        </aside>
+        <div id="editor" contenteditable=""></div>
+        <aside>
+            
+        </aside>
     </main>
 </div>
 
@@ -70,9 +88,7 @@
                         e.preventDefault()
 
                         const file = item.getAsFile()
-
                         const formData = new FormData()
-
                         formData.append("file", file, file.name || "pasted.png")
 
                         const url = atob("aHR0cHM6Ly9oYW55by13cml0ZXMub215cmF1Y3kud29ya2Vycy5kZXYvdXBsb2Fk")
