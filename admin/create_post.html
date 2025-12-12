@@ -1,6 +1,21 @@
 <head>
     <link rel="stylesheet" href="/main.css">
     <style>
+        .dashboard {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .dashboard nav {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        aside {
+
+        }
+
         #editor {
             width: 500px;
             height: 650px;
@@ -24,11 +39,18 @@
 </head>
 
 <div class="dashboard">
-    <div class="aside">
-        <a href="posts.html">Список постов</a>
-        <a href="create_post.html">Создать пост</a>
-    </div>
+    <nav>
+        <a href="/">
+            Перейти на сайт
+        </a>
+        <span><i>&copy; hanyo</i></span>
+    </nav>
+
     <main>
+        <div class="aside">
+            <a href="posts.html">Список постов</a>
+            <a href="create_post.html">Создать пост</a>
+        </div>
         <div id="editor" contenteditable="">
 
         </div>
@@ -37,12 +59,36 @@
 
 <script src="auth.js"></script>
 <script>
-(function() {
-    document.addEventListener('DOMContentLoaded', function() {
-        const editor = document.querySelector('#editor')
-        editor.focus()
+    (function () {
+        document.addEventListener('DOMContentLoaded', function () {
+            const editor = document.querySelector('#editor')
+            editor.focus()
 
+            editor.addEventListener("paste", async (e) => {
+                for (const item of e.clipboardData.items) {
+                    if (item.type.startsWith("image/")) {
+                        e.preventDefault()
 
-    })
-})()
+                        const file = item.getAsFile()
+
+                        const formData = new FormData()
+
+                        formData.append("file", file, file.name || "pasted.png")
+
+                        const url = atob("aHR0cHM6Ly9oYW55by13cml0ZXMub215cmF1Y3kud29ya2Vycy5kZXYvdXBsb2Fk")
+
+                        const resp = await fetch(url, {
+                            method: "POST",
+                            body: formData
+                        })
+
+                        const data = await resp.json()
+                        const imageUrl = data.url
+
+                        document.execCommand("insertHTML", false, `<img class="pasted" src=${imageUrl}>`)
+                    }
+                }
+            })
+        })
+    })()
 </script>
