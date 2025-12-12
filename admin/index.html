@@ -9,8 +9,10 @@
 </div>
 
 <script>
+(function() { 
     const authData = localStorage.getItem("auth")
     const url = atob("aHR0cHM6Ly9oYW55by13cml0ZXMub215cmF1Y3kud29ya2Vycy5kZXYvYXV0aA==")
+    const urlLogin = atob("aHR0cHM6Ly9oYW55by13cml0ZXMub215cmF1Y3kud29ya2Vycy5kZXYvbG9naW4=")
     const headers = { "Content-Type": "application/json" }
     // Если сохранилась запись об авторизации
     if (authData) {
@@ -23,6 +25,10 @@
             .then(data => {
                 if (data.status === "OK") {
                     document.location.href = "dashboard.html"
+                    localStorage.setItem('auth', data.account)
+                }
+                if (data.error) {
+                    alert(data.error)
                 }
             })
     }
@@ -46,9 +52,8 @@
             }
 
             const auth = btoa(JSON.stringify({ username, password }))
-            console.log(auth)
 
-            fetch(url, {
+            fetch(urlLogin, {
                 method: "POST",
                 headers,
                 body: JSON.stringify({ authData: auth })
@@ -56,7 +61,7 @@
                 .then(resp => resp.json())
                 .then(data => {
                     if (data.status === "OK") {
-                        localStorage.setItem("auth", auth)
+                        localStorage.setItem("auth", data.auth)
                         document.location.href = "dashboard.html"
                     } else if (data.error) {
                         alert(data.error)
@@ -64,4 +69,5 @@
                 })
         }
     })
+})()
 </script>
