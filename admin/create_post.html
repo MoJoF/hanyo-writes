@@ -1,0 +1,48 @@
+<head>
+    <link rel="stylesheet" href="/main.css">
+    <style>
+        #editor {
+            width: 500px;
+            height: 650px;
+            padding: 10px;
+            border: 1px solid white;
+            overflow-y: scroll;
+            line-height: 150%;
+            outline: none;
+            scroll-behavior: smooth;
+        }
+
+        #editor::-webkit-scrollbar {
+            display: none;
+        }
+
+        #editor img {
+            width: 100%;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<div class="dashboard">
+    <div class="aside">
+        <a href="posts.html">Список постов</a>
+        <a href="create_post.html">Создать пост</a>
+    </div>
+    <main>
+        <div id="editor" contenteditable="">
+
+        </div>
+    </main>
+</div>
+
+<script src="auth.js"></script>
+<script>
+(function() {
+    document.addEventListener('DOMContentLoaded', function() {
+        const editor = document.querySelector('#editor')
+        editor.focus()
+
+
+    })
+})()
+</script>

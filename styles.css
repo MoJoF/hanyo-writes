@@ -84,28 +84,6 @@ main {
   line-height: 160%;
 }
 
-
-#editor {
-  width: 500px;
-  min-height: 200px;
-  max-height: 1000px;
-  padding: 10px;
-  border: 1px solid white;
-  overflow-y: scroll;
-  line-height: 150%;
-}
-
-#editor::-webkit-scrollbar {
-  display: none;
-}
-
-#editor img {
-  width: 100%;
-  border-radius: 10px;
-}
-
-
-
 /* about page */
 .about {
   display: flex;
