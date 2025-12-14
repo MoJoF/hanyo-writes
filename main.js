@@ -36,8 +36,11 @@ function categories_processing() {
         body: JSON.stringify({ "action": "all_categories" })
     })
         .then(resp => resp.json())
-        .then(categories => cat_render(categories.allRecords))
-}
+        .then(categories => {
+            const all = categories.allRecords.filter(cat => cat.category_title !== "Блог")
+            cat_render(all)
+        })
+    }
 
 document.addEventListener("DOMContentLoaded", function() {
     categories_processing()
