@@ -175,13 +175,19 @@
                 mainCatElement.setAttribute("data-category-id", mainCat.category_id)
                 mainCatElement.className = "category-block"
                 
+                const blockElement = document.createElement("div")
+                blockElement.className = "block-cat"
                 const parentCheckElement = document.createElement("input")
                 parentCheckElement.type = "checkbox"
                 const parentLabelElement = document.createElement("label")
                 parentLabelElement.textContent = mainCat.category_title
 
-                mainCatElement.appendChild(parentCheckElement)
-                mainCatElement.appendChild(parentLabelElement)
+                blockElement.appendChild(parentCheckElement)
+                blockElement.appendChild(parentLabelElement)
+
+                
+
+                mainCatElement.appendChild(blockElement)
 
                 container.appendChild(mainCatElement)
             });
