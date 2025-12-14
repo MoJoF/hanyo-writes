@@ -5,7 +5,7 @@
             transition: .5s;
             text-underline-offset: 5px;
         }
-        
+
         a:hover {
             text-decoration: none;
         }
@@ -22,14 +22,14 @@
             padding: 10px;
         }
 
-        nav > a {
+        nav>a {
             font-style: italic;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        nav > div > button {
+        nav>div>button {
             font-size: 14px;
             background: transparent;
             padding: 10px;
@@ -39,7 +39,7 @@
             transition: .5s;
         }
 
-        nav > div > button:hover {
+        nav>div>button:hover {
             color: #000;
             background: #fff;
         }
@@ -154,15 +154,41 @@
             <div id="editor" contenteditable=""></div>
         </div>
         <aside>
-            
+            <h2>Категория</h2>
+            <!-- Fetch -->
+            <div class="select-category"></div>
         </aside>
     </main>
 </div>
 
 <script src="auth.js"></script>
 <script>
+
     (function () {
+        const renderCategories = categories => {
+            const container = document.querySelector('.select-category')
+
+            const mainCategories = categories.filter(cat => cat.category_parent_id === "none")
+
+            mainCategories.forEach(mainCat => {
+                const mainCatElement = document.createElement("div")
+                mainCatElement.setAttribute("data-category-id", mainCat.category_id)
+                mainCatElement.className = "category-block"
+                
+                const parentCheckElement = document.createElement("input")
+                parentCheckElement.type = "checkbox"
+                const parentLabelElement = document.createElement("label")
+                parentLabelElement.textContent = mainCat.category_title
+
+                mainCatElement.appendChild(parentCheckElement)
+                mainCatElement.appendChild(parentLabelElement)
+
+                container.appendChild(mainCatElement)
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
+            // Отправка картинки в R2 хранилище при нажатии CTRL+V
             const editor = document.querySelector('#editor')
             editor.focus()
 
@@ -189,6 +215,18 @@
                     }
                 }
             })
+
+            // Подгрузка списка категорий
+            const url = atob("aHR0cHM6Ly9oYW55by13cml0ZXMub215cmF1Y3kud29ya2Vycy5kZXYv")
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ action: "all_categories" })
+            })
+                .then(resp => resp.json())
+                .then(data => renderCategories(data.allRecords))
         })
     })()
 </script>
