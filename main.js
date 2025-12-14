@@ -1,31 +1,40 @@
 function cat_render(categories) {
     const sectionCats = document.querySelector(".sections")
+    if (!sectionCats) return
 
-    categories
-        .filter(cat => cat.parent_id === "none")
-        .forEach(c => {
-            const contBlock = document.createElement("div")
-            contBlock.classList = "block"
+    const parentCategories = categories.filter(
+        cat => cat.category_parent_id === "none"
+    )
 
-            const childCats = categories.filter(cat_child => cat_child.parent_id === c.parent_id)
+    parentCategories.forEach(c => {
+        const contBlock = document.createElement("div")
+        contBlock.className = "block"
 
-            contBlock.innerHTML = `
-                <a href="/category?link=${c.category_link}"><h3>${c.category_title}</h3></a>
-            `
-            const listLinks = document.createElement("div")
-            listLinks.classList = "list-links"
+        const childrenCats = categories.filter(
+            catChild => catChild.category_parent_id === c.category_id
+        )
 
-            childCats.forEach(el => {
-                const subCat = document.createElement("a")
-                subCat.href = `/category?link=${el.category_link}`
-                subCat.textContent = el.category_title
-                listLinks.appendChild(subCat)
-            })
+        contBlock.innerHTML = `
+            <a href="/category?link=${c.category_link}">
+                <h3>${c.category_title}</h3>
+            </a>
+        `
 
-            contBlock.appendChild(listLinks)
-            sectionCats.appendChild(contBlock)
-        });
+        const listLinks = document.createElement("div")
+        listLinks.className = "list-links"
+
+        childrenCats.forEach(el => {
+            const subCat = document.createElement("a")
+            subCat.href = `/category?link=${el.category_link}`
+            subCat.textContent = el.category_title
+            listLinks.appendChild(subCat)
+        })
+
+        contBlock.appendChild(listLinks)
+        sectionCats.appendChild(contBlock)
+    })
 }
+
 
 function categories_processing() {
     fetch("https://hanyo-writes.omyraucy.workers.dev/", {
@@ -40,8 +49,8 @@ function categories_processing() {
             const all = categories.allRecords.filter(cat => cat.category_title !== "Блог")
             cat_render(all)
         })
-    }
+}
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     categories_processing()
 })
