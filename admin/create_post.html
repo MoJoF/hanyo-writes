@@ -191,7 +191,7 @@
                 mainCatElement.appendChild(blockElement)
 
                 // Инициализация подкатегорий
-                const subcategories = categories.filter(subcat => subcat.category_parent_id === mainCat.category_parent_id)
+                const subcategories = categories.filter(subcat => subcat.category_parent_id === mainCat.category_id)
                 subcategories.forEach(subcategory => {
                     const blockElement2 = document.createElement("div")
                     blockElement2.className = "block-cat subcategory"
