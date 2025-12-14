@@ -173,8 +173,13 @@
                     },
                     body: JSON.stringify({ action: "create_post", post_title, post_html, category_id })
                 })
+                    .then(resp => resp.json())
+                    .then(data => {
+                        if (data.status === "success") {
+                            document.location.href = "edit_post.html?post_id=" + data.post_id
+                        }
+                    })
             }
-        
         })
     })()
 </script>
