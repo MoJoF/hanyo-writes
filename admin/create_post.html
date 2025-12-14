@@ -49,6 +49,7 @@
             <h2>Категория</h2>
             <!-- Fetch -->
             <div class="select-category"></div>
+            <h2>Публикация</h2>
         </aside>
     </main>
 </div>
@@ -82,6 +83,7 @@
                 subcategories.forEach(subcategory => {
                     const blockElement2 = document.createElement("div")
                     blockElement2.className = "block-cat subcategory"
+                    blockElement2.setAttribute("data-subcategory", subcategory.category_id)
                     const subcatCheckElement = document.createElement("input")
                     subcatCheckElement.type = "checkbox"
 
@@ -144,6 +146,35 @@
             })
                 .then(resp => resp.json())
                 .then(data => renderCategories(data.allRecords))
+        
+            // Обработка нажатия на кнопку "Сохранить черновик"
+            const saveDraftButton = document.querySelector("button.save-draft")
+            saveDraftButton.onclick = () => {
+                const post_title = document.querySelector(".header-rec").textContent
+                const post_html = document.querySelector("#editor").innerHTML
+
+                let category_id
+
+                document.querySelectorAll("[data-subcategory]")
+                    .forEach(subcat => {
+                        if (subcat.querySelector("input").checked) category_id = subcat.getAttribute("data-subcategory")
+                    })
+
+                if (!category_id) {
+                    document.querySelectorAll("[data-category-id]").forEach(el => {
+                        if (el.querySelector("input").checked) category_id = el.getAttribute("data-category-id")
+                    })
+                }
+
+                fetch(url, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ action: "create_post", post_title, post_html, category_id })
+                })
+            }
+        
         })
     })()
 </script>

@@ -66,9 +66,126 @@ aside section .links a {
     align-items: center;
 }
 
-main {
+/* Общий контейнер dashboard */
+.dashboard {
     display: flex;
-    justify-content: stretch;
+    flex-direction: column;
+    height: 100vh; /* весь экран */
+}
+
+/* Навигация сверху */
+.dashboard nav {
+    height: 60px; /* высота nav */
+    min-height: 60px;
+    background: #333;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+.dashboard nav a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+}
+
+.dashboard nav a img {
+    width: 24px;
+    height: 24px;
+    margin-right: 5px;
+}
+
+.dashboard nav button {
+    margin-left: 10px;
+}
+
+/* Main — занимает оставшуюся высоту */
+.dashboard main {
+    display: flex;
+    flex: 1; /* растягивается на всё оставшееся место */
+    min-height: 0; /* важно для flex children */
+}
+
+/* Левая панель */
+main > aside:first-child {
+    width: 220px;
+    min-width: 220px;
+    min-height: 0;
+    overflow: auto;
+    border-right: 1px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+    background: #1b1b1b;
+}
+
+/* Центральный редактор */
+main > .record-block {
+    flex: 1; /* занимает оставшееся пространство */
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden; /* скролл будет только внутри editor */
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* Заголовок */
+.record-block .header-rec {
+    padding: 8px;
+    margin-bottom: 8px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Редактор */
+#editor {
+    flex: 1;
+    border: 1px solid #aaa;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: auto; /* скролл внутри */
+    background: #1b1b1b;
+}
+
+/* Правая панель */
+main > aside:last-child {
+    width: 200px;
+    min-width: 200px;
+    min-height: 0;
+    overflow: auto;
+    border-left: 1px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+    background: #1b1b1b;
+}
+
+/* Внутренние элементы для красоты */
+aside section {
+    margin-bottom: 20px;
+}
+
+aside h2 {
+    margin: 0 0 10px 0;
+    font-size: 1rem;
+}
+
+.links a {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    text-decoration: none;
+    color: #333;
+}
+
+.links img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
 }
 
 .record-block {
@@ -86,7 +203,7 @@ input.header-rec {
 }
 
 #editor {
-    height: -webkit-fill-available;
+    /* height: 100vh; */
     padding: 30px;
     border: 1px solid white;
     overflow-y: scroll;
