@@ -1,118 +1,6 @@
 <head>
     <link rel="stylesheet" href="/main.css">
-    <style>
-        a {
-            transition: .5s;
-            text-underline-offset: 5px;
-        }
-
-        a:hover {
-            text-decoration: none;
-        }
-
-        .dashboard {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-        }
-
-        .dashboard nav {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px;
-        }
-
-        nav>a {
-            font-style: italic;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        nav>div>button {
-            font-size: 14px;
-            background: transparent;
-            padding: 10px;
-            border: 1px solid #fff;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: .5s;
-        }
-
-        nav>div>button:hover {
-            color: #000;
-            background: #fff;
-        }
-
-        aside {
-            background: #292929;
-            width: 400px;
-            padding: 10px;
-        }
-
-        aside section {
-            display: flex;
-            flex-direction: column;
-        }
-
-        aside section .links {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-
-        aside section .links a {
-            display: flex;
-            gap: 10px;
-            font-size: 20px;
-            align-items: center;
-        }
-
-        main {
-            display: flex;
-            justify-content: stretch;
-        }
-
-        .record-block {
-            width: 100%;
-            padding: 10px;
-        }
-
-        input.header-rec {
-            padding: 10px;
-            outline: none;
-            background: transparent;
-            font-size: 32px;
-            border: none;
-            width: 100%;
-        }
-
-        #editor {
-            height: -webkit-fill-available;
-            padding: 30px;
-            border: 1px solid white;
-            overflow-y: scroll;
-            line-height: 175%;
-            outline: none;
-            font-size: 24px;
-            scroll-behavior: smooth;
-            white-space: pre-wrap;
-        }
-
-        #editor::-webkit-scrollbar {
-            display: none;
-        }
-
-        #editor img {
-            width: 100%;
-            border-radius: 10px;
-        }
-
-        .subcategory {
-            margin-left: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="create_post.css">
 </head>
 
 <div class="dashboard">
@@ -167,7 +55,6 @@
 
 <script src="auth.js"></script>
 <script>
-
     (function () {
         const renderCategories = categories => {
             const container = document.querySelector('.select-category')
@@ -177,7 +64,7 @@
             mainCategories.forEach(mainCat => {
                 const mainCatElement = document.createElement("div")
                 mainCatElement.className = "category-block"
-                
+
                 const blockElement = document.createElement("div")
                 blockElement.className = "block-cat"
                 blockElement.setAttribute("data-category-id", mainCat.category_id)
