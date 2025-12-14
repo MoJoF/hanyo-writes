@@ -108,6 +108,10 @@
             width: 100%;
             border-radius: 10px;
         }
+
+        .subcategory {
+            margin-left: 10px;
+        }
     </style>
 </head>
 
@@ -172,11 +176,11 @@
 
             mainCategories.forEach(mainCat => {
                 const mainCatElement = document.createElement("div")
-                mainCatElement.setAttribute("data-category-id", mainCat.category_id)
                 mainCatElement.className = "category-block"
                 
                 const blockElement = document.createElement("div")
                 blockElement.className = "block-cat"
+                blockElement.setAttribute("data-category-id", mainCat.category_id)
                 const parentCheckElement = document.createElement("input")
                 parentCheckElement.type = "checkbox"
                 const parentLabelElement = document.createElement("label")
@@ -184,10 +188,30 @@
 
                 blockElement.appendChild(parentCheckElement)
                 blockElement.appendChild(parentLabelElement)
-
-                
-
                 mainCatElement.appendChild(blockElement)
+
+                // Инициализация подкатегорий
+                const subcategories = categories.filter(subcat => subcat.category_parent_id === mainCat.category_parent_id)
+                subcategories.forEach(subcategory => {
+                    const blockElement2 = document.createElement("div")
+                    blockElement2.className = "block-cat subcategory"
+                    const subcatCheckElement = document.createElement("input")
+                    subcatCheckElement.type = "checkbox"
+
+                    subcatCheckElement.onchange = (e) => {
+                        let val = e.target.value
+                        if (val) {
+                            parentCheckElement.checked = "true"
+                        }
+                    }
+
+                    const subcatLabelElement = document.createElement("label")
+                    subcatLabelElement.textContent = subcategory.category_title
+                    blockElement2.appendChild(subcatCheckElement)
+                    blockElement2.appendChild(subcatLabelElement)
+
+                    mainCatElement.appendChild(blockElement2)
+                })
 
                 container.appendChild(mainCatElement)
             });
