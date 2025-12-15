@@ -175,7 +175,7 @@
                 })
                     .then(resp => resp.json())
                     .then(data => {
-                        if (data.status === "success") {
+                        if (data.status === "OK") {
                             document.location.href = "edit_post.html?post_id=" + data.post_id
                         }
                     })
