@@ -8,6 +8,7 @@ const postsRender = posts => {
 
     if (posts.length === 0) {
         container.textContent = "Здесь пока ничего нет"
+        return
     }
 
     posts.forEach(postObj => {
