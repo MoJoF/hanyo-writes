@@ -1,3 +1,5 @@
+const urlAddress = atob("aHR0cHM6Ly9oYW55by13cml0ZXMub215cmF1Y3kud29ya2Vycy5kZXYv")
+
 const url = new URL(window.location.href)
 const link = url.searchParams.get("link")
 
@@ -6,14 +8,27 @@ const parentCategoryRender = data => {
 }
 
 const childCategoryRender = data => {
+    const container = document.querySelector('main')
 
+    const categoryBlock = document.createElement("div")
+    categoryBlock.className = "category-block"
+    
+    const categoryHeader = document.createElement("h2")
+    categoryHeader.className = "category-title"
+    categoryHeader.textContent = data.child.category_title
+
+    const categoryDescription = document.createElement("p")
+    categoryDescription.className = "category-description"
+    categoryDescription.textContent = data.child.category_description
+
+    categoryBlock.appendChild(categoryHeader)
+
+    container.appendChild(categoryBlock)
 }
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    const url = atob("aHR0cHM6Ly9oYW55by13cml0ZXMub215cmF1Y3kud29ya2Vycy5kZXYv")
-
-    fetch(url, {
+    fetch(urlAddress, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
