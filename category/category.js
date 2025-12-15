@@ -51,7 +51,7 @@ const childCategoryRender = category => {
         headers: {
             "Content-Type": 'application/json'
         },
-        body: JSON.stringify({ "action": "get_posts_by_category", category: data.child })
+        body: JSON.stringify({ "action": "get_posts_by_category", category })
             .then(resp => resp.json())
             .then(d => {
                 if (d.status === "OK") {
