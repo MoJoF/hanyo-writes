@@ -72,7 +72,6 @@ document.addEventListener('DOMContentLoaded', function () {
     })
         .then(resp => resp.json())
         .then(data => {
-            console.log(data)
             if (data.type === "parent") {
                 document.title = data.parent.category_title
                 parentCategoryRender(data)
