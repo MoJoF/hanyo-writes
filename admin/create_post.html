@@ -150,7 +150,7 @@
             // Обработка нажатия на кнопку "Сохранить черновик"
             const saveDraftButton = document.querySelector("button.save-draft")
             saveDraftButton.onclick = () => {
-                const post_title = document.querySelector(".header-rec").textContent
+                const post_title = document.querySelector(".header-rec").value
                 const post_html = document.querySelector("#editor").innerHTML
 
                 let category_id
