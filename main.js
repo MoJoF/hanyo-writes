@@ -37,7 +37,9 @@ function cat_render(categories) {
 
 
 function categories_processing() {
-    fetch("https://hanyo-writes.omyraucy.workers.dev/", {
+    const url = atob("aHR0cHM6Ly9oYW55by13cml0ZXMub215cmF1Y3kud29ya2Vycy5kZXYv")
+
+    fetch(url, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
