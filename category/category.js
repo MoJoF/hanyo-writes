@@ -74,8 +74,10 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(data => {
             console.log(data)
             if (data.type === "parent") {
+                document.head.title = data.parent.category_title
                 parentCategoryRender(data)
             } else if (data.type === "child") {
+                document.head.title = data.category.category_title
                 childCategoryRender(data.category)
             }
         })
