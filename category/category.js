@@ -36,11 +36,11 @@ const childCategoryRender = data => {
     
     const categoryHeader = document.createElement("h2")
     categoryHeader.className = "category-title"
-    categoryHeader.textContent = data.child.category_title
+    categoryHeader.textContent = data.category.category_title
 
     const categoryDescription = document.createElement("p")
     categoryDescription.className = "category-description"
-    categoryDescription.textContent = data.child.category_description
+    categoryDescription.textContent = data.category.category_description
 
     categoryBlock.appendChild(categoryHeader)
 
