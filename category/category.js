@@ -28,7 +28,7 @@ const parentCategoryRender = data => {
 
 }
 
-const childCategoryRender = data => {
+const childCategoryRender = category => {
     const container = document.querySelector('main')
 
     const categoryBlock = document.createElement("div")
@@ -36,11 +36,11 @@ const childCategoryRender = data => {
     
     const categoryHeader = document.createElement("h2")
     categoryHeader.className = "category-title"
-    categoryHeader.textContent = data.category.category_title
+    categoryHeader.textContent = category.category_title
 
     const categoryDescription = document.createElement("p")
     categoryDescription.className = "category-description"
-    categoryDescription.textContent = data.category.category_description
+    categoryDescription.textContent = category.category_description
 
     categoryBlock.appendChild(categoryHeader)
 
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (data.type === "parent") {
                 parentCategoryRender(data)
             } else if (data.type === "child") {
-                childCategoryRender(data)
+                childCategoryRender(data.category)
             }
         })
 })
